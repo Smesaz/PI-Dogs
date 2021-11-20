@@ -1,0 +1,46 @@
+.body_landing {
+    background-image: url('../../img/landingdog.jpg');
+    /* background-image: linear-gradient(180deg, hsla(153, 91%, 56%, 0.692) 0%, rgba(0, 156, 253, 0.698) 100%),url('../../img/landingdog.jpg'); */
+    /* background-image: linear-gradient(to top, hsla(72, 7%, 85%, 0.685) 0%, hsla(50, 8%, 85%, 0.698) 24%, hsla(353, 30%, 84%, 0.692) 30%, hsla(348, 73%, 65%, 0.698) 46%, hsla(338, 68%, 43%, 0.685) 59%, hsla(323, 74%, 29%, 0.692) 71%, hsla(312, 47%, 16%, 0.698) 84%, hsla(249, 20%, 13%, 0.63) 100%),url('../../img/landingdog.jpg'); */
+    /* background-image: linear-gradient(to top, rgba(250, 208, 196, 0.692) 0%, hsla(300, 100%, 91%, 0.698) 100%),url('../../img/landingdog.jpg'); */
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    overflow: hidden;
+    height: 100vh;
+    width: 100%;
+}
+.container_landing{
+    color: black;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    width: 100%;
+    align-items: center;
+    /* justify-content: center; */
+    /* border: 1px solid black; */
+    margin-top: 100px;
+}
+.container_landing h1{
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+.container_landing a{
+    display: inline-block;
+    text-decoration: none;
+    border: 1px solid black;
+    margin: 10px;
+    padding: 10px 30px;
+    background: black;
+    border-radius: 8px;
+    color: blanchedalmond;
+    transition: all 0.8s;
+    transform: scale(1);
+}
+.container_landing a:hover{
+    background-color: white;
+    color: black;
+    transform: scale(1.5);
+    
+}

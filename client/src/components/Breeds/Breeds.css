@@ -1,0 +1,36 @@
+.container_Breeds {
+    width: 100%;
+    max-width: 1000px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding-top: 20px;
+    margin-left: 380px;
+    overflow: hidden;
+    
+}
+.buttons_paginated{
+    width: 100%;
+    max-width: 1000px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    padding-top: 20px;
+    margin-left: 380px;
+    margin-bottom: 20px;
+    height: 40px;
+}
+.buttons_paginated button{
+    width: 60px;
+    height: 60px;
+    border-radius: 5px;
+    font-weight: bolder;
+    margin-left: 10px;
+}
+.selected_page{
+    background-color: rgba(107, 107, 200, 0.883);
+    color: #fff;
+    border: 3px solid black;
+}

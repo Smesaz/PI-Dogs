@@ -1,7 +1,12 @@
 .App {
   text-align: center;
+  height: 100%;
+  
+  
 }
-
+body{
+  font-family: 'Raleway', sans-serif;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;

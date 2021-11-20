@@ -39,6 +39,7 @@ const DBDogs = async ()=>{
              weight_min: b.weight_min,
              weight_max: b.weight_max,
              life_span: b.life_span,
+             image:b.image,
              temperament:b.dataValues.temperaments.map(t=>t.name).join(", "),
          }
      })

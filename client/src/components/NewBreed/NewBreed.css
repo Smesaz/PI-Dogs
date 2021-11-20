@@ -1,0 +1,13 @@
+.line_rigth{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    background-color: rgba(171, 196, 241, 0.575);
+    border-left: 3px solid black;
+    position: fixed;
+    right: 0;
+    z-index: 20;
+    height: 100%;
+    width: 12px;
+}

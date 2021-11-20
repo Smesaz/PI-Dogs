@@ -36,6 +36,9 @@ module.exports = (sequelize) => {
     life_span:{
       type: DataTypes.STRING,
     },
+    image:{
+      type: DataTypes.TEXT,
+    },
     
   },{timestamps: false,});
   sequelize.define('temperament', {

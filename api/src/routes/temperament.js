@@ -12,7 +12,9 @@ router.get('/', async(req,res)=>{
     const unique_temps=[...set_temps];
 
     unique_temps.forEach(async(e)=>{
-        await Temperament.create({name: e})  
+        await Temperament.findOrCreate({
+            where: {name: e},
+        })  
         });
     res.send(unique_temps);
     } catch (error){

@@ -2,10 +2,12 @@ const {DB_Api_Dogs} = require('../controller/api_db');
 const router = require('express').Router();
 
 router.get('/', async(req, res)=>{
+    try{
     const {name}= req.query;
     const db_api_Dogs = await DB_Api_Dogs();
     const allDogs=db_api_Dogs.map(b=>{
         const obj={
+            id:b.id,
             name:b.name,
             image:b.image,
             temperament:b.temperament,
@@ -20,6 +22,9 @@ router.get('/', async(req, res)=>{
         return filterDog.length>0 ? res.send(filterDog) : res.status(404).send(`<h1>Dog Breed not Found</h1>`); 
     }
     res.send(allDogs)
+    } catch (error){
+        res.sendStatus(404);
+    }
 });
 
 router.get('/:id', async(req,res)=>{

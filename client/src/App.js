@@ -1,25 +1,21 @@
 import React from 'react';
-import {Route} from 'react-router-dom';
+import {Route, Routes,Navigate} from 'react-router-dom';
 import './App.css';
+import Landing from './components/Landing/Landing';
+import Home from './components/Home/Home';
+import Details from './components/Details/Details';
+import NewBreed from './components/NewBreed/NewBreed';
+
 function App() {
   return (
     <div className="App">
-      <h1>Henry Dogs</h1>
-      <Route exact path='/landing'>
-        <Landing/>
-      </Route>
-      <Route path='/'>
-        <Nav/>
-      </Route>
-      <Route path='/home'>
-        <Home/>
-      </Route>
-      <Route path='/details'>
-        <Details/>
-      </Route>
-      <Route path='/newbreed'>
-        <NewBreed/>
-      </Route>
+      <Routes>
+      <Route path='/' element={<Landing />}/>
+      <Route path='home' element={<Home/>}/>
+      <Route path='details/:id' element={<Details/>}/>
+      <Route path='newbreed' element={<NewBreed/>}/>
+      <Route path='*' element={<Navigate to='/'/>}/>
+      </Routes>
     </div>
   );
 }
