@@ -11,3 +11,90 @@
     height: 100%;
     width: 12px;
 }
+.Form{
+    background-image: linear-gradient(to top, #fddb92 0%, #d1fdff 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    min-height: 100vh;
+    width: 100%;
+    flex-wrap: wrap;
+}
+.Form_newBreed{
+    background-image: url('../../img/formnewbreed.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    border-radius: 10px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 1px solid black;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 600px;
+    min-height: 600px;
+    
+}
+.Form_newBreed input{
+    width: 100%;
+    border-radius: 10px;
+   padding-block: 5px;
+    
+}
+.Form_newBreed p{
+    color: red;
+    font-weight: bold;
+    text-align: start;
+    margin-top: -2px;
+}
+.Form_newBreed label{
+    font-weight: bolder;
+}
+.Form_newBreed select{
+    width: 100%;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: bolder;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    margin-top: 20px;
+    margin-left: 4px;
+}
+.submit_btn{
+    font-weight: bold;
+    margin-left: 4px;
+    padding-top: 10px;
+    border: 3px solid;
+    background-color: rgba(255, 255, 255, 0.37);
+    transition: all 0.5s;
+
+}
+.submit_btn:hover{
+    background-color: rgba(10, 243, 68, 0.63);
+}
+.selected_temps{
+    width: 400px;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.selected_temps a {
+    border: 2px solid black;
+    background-color: rgba(171, 196, 241, 0.383);
+    font-weight: bolder;
+    padding: 8px;
+    margin: 5px;
+    border-radius: 8px;
+  }
+  .selected_temps a:hover {
+    color: white;
+    background-color: rgba(200, 40, 19, 0.733);
+  }

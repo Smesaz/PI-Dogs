@@ -2,25 +2,29 @@ import React, {useEffect} from "react";
 import './Details.css';
 import Nav from "../Nav/Nav";
 import { useParams } from "react-router";
-import {getBreedDetails} from '../../actions/index';
+import {getBreedDetails,loading} from '../../actions/index';
 import {connect} from 'react-redux';
+import img_loading from '../../img/dog2.gif';
 
-const Details=({getBreedDetails,Details_Breed})=>{
+const Details=({getBreedDetails,Details_Breed,loading,waiting})=>{
         const Breed_id=useParams().id;
         useEffect(async() => {
-            await getBreedDetails(Breed_id)
+            await loading();
+            await getBreedDetails(Breed_id);
         }, [Breed_id])
     return(
         <div className='container_details'>
             <Nav/>
             <div className='line_rigth'></div>
             <div className='breed_details'>
-                {Details_Breed.map(b=>{
+                {waiting?<img src={img_loading} className='loading_img_2' alt='loading'/>
+                :Details_Breed.map(b=>{
                     return b?(
                         <div>
                         <img src={b.image} alt={`imagen de ${b.name}`}></img>
                         <h3>{b.name}</h3>
-                        <h4>Temperaments:</h4>
+                        {b.temperament&& b.temperament!=='undefined,'?b.temperament!==','?<h4>Temperaments:</h4>:
+                        <br></br>:<br></br>}
                         <p>{b.temperament}</p>
                         <div className='weight'>
                         {b.weight_min && b.weight_min!=="NaN"?<h4>Weight min: </h4>:<br></br>}
@@ -52,10 +56,12 @@ const Details=({getBreedDetails,Details_Breed})=>{
 
 const mapDispatchToProps={
     getBreedDetails,
+    loading,
 }
 const mapStateToProps= (state)=>{
     return{
         Details_Breed: state.Breeds_Details,
+        waiting:state.loading,
     }
 }
 

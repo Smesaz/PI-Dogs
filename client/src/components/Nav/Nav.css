@@ -26,7 +26,7 @@
     padding: 10px;
     color: rgb(0, 0, 0);
     font-weight: bold;
-    transition: all 0.4s;
+    transition: all 0.7s;
     text-align: center;
     background-color: rgb(255, 255, 255);
 }
@@ -37,6 +37,9 @@
     color: rgb(255, 255, 255);
 }
 .container_Nav img{
-    width: 80px;
-    height: 80px;
+    border-radius: 12px;
+    opacity: 0.6;
+    margin-top: 400px;
+    width: 70px;
+    height: 70px;
 }

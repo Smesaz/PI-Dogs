@@ -4,7 +4,7 @@
     background-color: rgba(171, 196, 241, 0.383);
     height: 525px;
     border-radius: 8px;
-    overflow: hidden;
+    overflow: auto;
     margin: 20px;
     text-align: center;
     justify-content: center;

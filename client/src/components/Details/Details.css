@@ -6,21 +6,29 @@
     justify-content: center;
     align-items: center;
     background-color: rgba(238, 227, 227, 0.397);
+    background-image: linear-gradient(to top, #fddb92 0%, #d1fdff 100%);
 }
 .breed_details{
+    display: flex;
+    flex-direction: column;
     width: 650px;
     text-decoration: none;
     background-color: rgba(171, 196, 241, 0.383);
-    height: 800px;
+    min-height: 650px;
     border-radius: 8px;
     overflow: hidden;
     margin: 15px;
     text-align: center;
     justify-content: center;
     align-items: center;
-    transition: all 0.25s;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
 }
+.loading_img_2 {
+    margin: 100px;
+    border-radius: 20px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+    opacity: 0.5;
+  }
 .breed_details img{
     margin-top: 12px;
     width: 430px;

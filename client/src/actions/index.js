@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const getBreeds= ()=>{
     return async(dispatch)=>{
-        return await axios.get(`http://localhost:3002/dogs`)
+         return await axios.get(`http://localhost:3002/dogs`)
         .then( json=>{
            return dispatch({type: "GET_BREEDS", payload: json.data});
         }) 
@@ -61,5 +61,10 @@ return async(dispatch)=>{
     } catch (er){
         console.log('Error POST/dog',er);
         }
+    }
+}
+export const loading=()=>{
+    return{
+        type:"LOAD",
     }
 }

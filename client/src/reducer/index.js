@@ -28,6 +28,8 @@ const breeds_reucer = (state=initialState, action) =>{
                 ...state, 
                 Breeds:get_breeds_all.length>0?get_breeds_all:[{name:"Breed not found"}],
                 Only_Breeds:action.payload.map((b)=>b.name),
+                Breeds_Details:[],
+                loading:false,
             }
         case "GET_BREEDS_NAME":
             let get_breeds_name=action.payload.map(b=>{
@@ -46,6 +48,7 @@ const breeds_reucer = (state=initialState, action) =>{
 
             return {
                 ...state, Breeds:Breeds_name.length>0?Breeds_name:[{name:"Breed not found"}],
+                loading:false,
             }
         case "GET_TEMPERAMENTS":
             let temps= action.payload.sort()
@@ -54,7 +57,8 @@ const breeds_reucer = (state=initialState, action) =>{
             }
         case "GET_BREEDS_NAME_FAILURE":
             return {
-                ...state, Breeds:action.error
+                ...state, Breeds:action.error,
+                loading:false,
             }
         case "GET_FILTER_TEMPERAMENT_BREEDS":
             let arr=[...state.Temps_selected];
@@ -144,11 +148,18 @@ const breeds_reucer = (state=initialState, action) =>{
             return{
                 ...state,
                 Breeds:Breeds_order.length>0?Breeds_order:[{name:"Breed not found or another error"}],
+                loading:false
             }
         case "BREED_DETAILS":  
             return{
                 ...state,
                 Breeds_Details: action.payload,
+                loading:false,
+            }
+        case "LOAD":
+            return{
+                ...state,
+                loading:true,
             }
         default:
             return state;

@@ -1,8 +1,10 @@
 .container_Home{
-    background-color:rgba(238, 227, 227, 0.397);
+    /* background-color:rgba(238, 227, 227, 0.397); */
+    background-image: linear-gradient(to top, hsla(41, 96%, 78%, 0.808) 0%, hsla(183, 100%, 91%, 0.808) 100%);
     position:relative;
     width: 100%;
     max-height: 100%;
+    min-height: 100vh;
 }
 .container_Home_input{
     padding-top: 50px;
