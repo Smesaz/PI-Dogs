@@ -7,6 +7,7 @@ const initialState={
     loading:true,
     Temps_selected:[],
     Breeds_Details:[],
+    pagination:0,
 };
 
 const breeds_reucer = (state=initialState, action) =>{
@@ -23,12 +24,14 @@ const breeds_reucer = (state=initialState, action) =>{
                         if(b.temperament&& b.temperament.includes(arra[i]+",")) cont=cont+1;
                     }
                     if(cont===arra.length) return b;   
-                }):get_breeds
+                }):get_breeds;
+            let page_ctrl=state.Breeds_Details.length>0?state.pagination:0;
             return {
-                ...state, 
+                ...state,
+                pagination:page_ctrl, 
                 Breeds:get_breeds_all.length>0?get_breeds_all:[{name:"Breed not found"}],
                 Only_Breeds:action.payload.map((b)=>b.name),
-                Breeds_Details:[],
+                // Breeds_Details:[],
                 loading:false,
             }
         case "GET_BREEDS_NAME":
@@ -49,6 +52,7 @@ const breeds_reucer = (state=initialState, action) =>{
             return {
                 ...state, Breeds:Breeds_name.length>0?Breeds_name:[{name:"Breed not found"}],
                 loading:false,
+                Breeds_Details:[],
             }
         case "GET_TEMPERAMENTS":
             let temps= action.payload.sort()
@@ -59,6 +63,7 @@ const breeds_reucer = (state=initialState, action) =>{
             return {
                 ...state, Breeds:action.error,
                 loading:false,
+                Breeds_Details:[],
             }
         case "GET_FILTER_TEMPERAMENT_BREEDS":
             let arr=[...state.Temps_selected];
@@ -71,6 +76,7 @@ const breeds_reucer = (state=initialState, action) =>{
                 ...state, 
                 Breeds: newBreed.length<1?[{name:"Breed not found"}]:newBreed,
                 Temps_selected:arr,
+                Breeds_Details:[],
             }
         case "RESET_FILTER_TEMPERAMENT_BREEDS":
             let ar=[...state.Temps_selected];
@@ -87,29 +93,31 @@ const breeds_reucer = (state=initialState, action) =>{
                 ...state,
                 Temps_selected:new_ar,
                 Breeds:newBreed_2.length>0||new_ar.length!==0?newBreed_2.length>0?newBreed_2:[{name:"Breed not found"}]:state.Breeds,
+                Breeds_Details:[],
             }
         case "RESET_ALL_FILTER_TEMPERAMENTS":
             return{
-                ...state, Temps_selected:[],
+                ...state, Temps_selected:[],Breeds_Details:[],
             }
         case "ORDER_BY":
             let typeorder=action.payload;
             let Breeds_order=[...state.Breeds];
+            let details_breed=state.Breeds_Details;
             switch (typeorder) {
                 case "Ascending":
-                    let asc=Breeds_order.map(b=>b.name).sort();
+                    let asc=Breeds_order.map(b=>b.name.toUpperCase()).sort();
                     let Asc=asc.map(n=>{
                         let arr=[];
-                        Breeds_order.find(b=>{if(b.name===n) arr.push(b)})
+                        Breeds_order.find(b=>{if(b.name.toUpperCase()===n.toUpperCase()) arr.push(b)})
                         return arr;
                     });
                     Breeds_order=[...Asc].flat();
                     break;
                 case "Descending":
-                    let desc=Breeds_order.map(b=>b.name).sort().reverse();
+                    let desc=Breeds_order.map(b=>b.name.toUpperCase()).sort().reverse();
                     let Desc=desc.map(n=>{
                         let arr=[];
-                        Breeds_order.find(b=>{if(b.name===n) arr.push(b)})
+                        Breeds_order.find(b=>{if(b.name.toUpperCase()===n.toUpperCase()) arr.push(b)})
                         return arr;
                     });
                     Breeds_order=[...Desc].flat();
@@ -117,10 +125,12 @@ const breeds_reucer = (state=initialState, action) =>{
                 case "Form":
                     let form_breeds=Breeds_order.filter(b=>b.id>1000);
                     Breeds_order=[...form_breeds];
+                    details_breed=[];
                     break;
                 case "Server":
                     let api_breeds=Breeds_order.filter(b=>b.id<500);
                     Breeds_order=[...api_breeds];
+                    details_breed=[];
                     break;
                 case "minW":
                     let min_weight=Breeds_order.map(b=>{if(b.weight_min&&b.weight_min!=="NaN"&&b.weight_max)return b.weight_min}).sort((mn,mx)=>mn-mx)
@@ -148,7 +158,8 @@ const breeds_reucer = (state=initialState, action) =>{
             return{
                 ...state,
                 Breeds:Breeds_order.length>0?Breeds_order:[{name:"Breed not found or another error"}],
-                loading:false
+                loading:false,
+                Breeds_Details:details_breed,
             }
         case "BREED_DETAILS":  
             return{
@@ -160,6 +171,11 @@ const breeds_reucer = (state=initialState, action) =>{
             return{
                 ...state,
                 loading:true,
+            }
+        case "CONTROL_PAGINATION":
+            return{
+                ...state,
+                pagination:action.payload,
             }
         default:
             return state;

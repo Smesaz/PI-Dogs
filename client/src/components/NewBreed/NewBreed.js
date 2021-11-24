@@ -2,10 +2,10 @@ import React, {useState} from "react";
 import './NewBreed.css';
 import Nav from "../Nav/Nav";
 import image_newbreed from "../../img/newbreed.jpg";
-import {postbreed} from "../../actions/index";
+import {getBreeds, postbreed} from "../../actions/index";
 import { connect } from "react-redux";
 
-const NewBreed=({postbreed,Temperaments,Only_Breeds})=>{
+const NewBreed=({postbreed,Temperaments,Only_Breeds,getBreeds})=>{
     const [selectedTemps, setselectedTemps]= useState([]);
     const [errors, seterrors] = useState(false)
     const [input, setInput] = useState({
@@ -31,6 +31,18 @@ const NewBreed=({postbreed,Temperaments,Only_Breeds})=>{
         e.preventDefault();
         await postbreed(input);
         alert('Breed Created Successfully')
+        setInput({
+            name:'',
+            life_span:'',
+            weight_min:'',
+            weight_max:'',
+            temperament:[],
+            height_min:'',
+            height_max:'',
+            image:image_newbreed,
+        });
+        setselectedTemps([]);
+        await getBreeds();
     }
     const HandleSelectedTemps =(e)=>{
         if(!input.temperament.includes(e.target.value)){
@@ -67,19 +79,19 @@ const NewBreed=({postbreed,Temperaments,Only_Breeds})=>{
                     <br/>
                     <br/>
                     <label>Weigth*(Kg)</label>
-                    <input required placeholder='min weigth...' min='1' max={input.weight_max-1} type="number" name="weight_min" value={input.weight_min} onChange={HandleInputChange}/>
+                    <input required placeholder='min weigth...' min='1' max={input.weight_max-1} type="number" pattern="^[0-9]+" name="weight_min" value={input.weight_min} onChange={HandleInputChange}/>
                     <input required placeholder='max weigth...' min='1' type="number" name="weight_max" value={input.weight_max} onChange={HandleInputChange}/>
                     <br/>
                     <br/>
                     <br/>
                     <label>Heigth*(m)</label>
-                    <input required placeholder='min heigth...' min='1' max={input.height_max-1} type="number" name="height_min" value={input.height_min} onChange={HandleInputChange}/>
+                    <input required placeholder='min heigth...' min='1' max={input.height_max-1} type="number" pattern="^[0-9]+" name="height_min" value={input.height_min} onChange={HandleInputChange}/>
                     <input required placeholder='max heigth...' min='1' type="number" name="height_max" value={input.height_max} onChange={HandleInputChange}/>
                     <br/>
                     <br/>
                     <br/>
                     <label>Life Span*(years)</label>
-                    <input required placeholder='# years' type="text" name="life_span" value={input.life_sapn} onChange={HandleInputChange}/>
+                    <input required placeholder='# years' type="text" name="life_span" value={input.life_span} onChange={HandleInputChange}/>
                     <br/>
                     <br/>
                     <br/>
@@ -107,6 +119,7 @@ const NewBreed=({postbreed,Temperaments,Only_Breeds})=>{
 
 const mapDispatchToProps={
     postbreed,
+    getBreeds,
 }
 const mapStateToProps=(state)=>{
     return{

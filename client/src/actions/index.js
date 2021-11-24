@@ -68,3 +68,9 @@ export const loading=()=>{
         type:"LOAD",
     }
 }
+export const pagination_ctrl=(payload)=>{
+    return{
+        type: "CONTROL_PAGINATION",
+        payload: Math.ceil(payload),
+    }
+}

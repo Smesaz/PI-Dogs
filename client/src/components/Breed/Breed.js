@@ -2,7 +2,7 @@ import React from "react";
 import './Breed.css';
 import { NavLink } from "react-router-dom";
 
-const Breed = ({datos,reset,page}) =>{
+const Breed = ({datos,reset}) =>{
     return(
         <div className={datos.weight_min||datos.weight_max?'container_Breed':'container_Breed_min'}>
            {datos.image? <NavLink to={`/details/${datos.id}`}><img src={datos.image} alt={`imagen de ${datos.name}`}/>

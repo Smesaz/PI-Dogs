@@ -1,12 +1,12 @@
 import React, {useState,useEffect} from "react";
 import './Breeds.css'
-import {getBreeds,getTemperaments, loading} from '../../actions/index';
+import {getBreeds,getTemperaments, loading, pagination_ctrl} from '../../actions/index';
 import { connect } from "react-redux";
 import Breed from '../Breed/Breed';
 import img_loading from '../../img/dog2.gif';
 
-const Breeds = ({getBreeds, getTemperaments,Breeds_state,input,reset,loading,waiting})=>{
-    const [paginated, setPaginated] = useState(0);
+const Breeds = ({getBreeds, getTemperaments,Breeds_state,input,reset,loading,waiting,pagination_ctrl,pagination,Breeds_Details})=>{
+    const [paginated, setPaginated] = useState(pagination);
 
     useEffect(async() => {
         if(input.length===0) {
@@ -17,8 +17,8 @@ const Breeds = ({getBreeds, getTemperaments,Breeds_state,input,reset,loading,wai
     }, [input.length]);
 
     useEffect(async()=>{
-        setPaginated(0);
-    },[Breeds_state]);
+        if(Breeds_Details.length===0)setPaginated(0);
+    },[Breeds_state.length]);
     // const nextpage = ()=>{
     //     if(Breeds_state.length>paginated+8) setPaginated(paginated+8);
     // } 
@@ -36,6 +36,7 @@ const Breeds = ({getBreeds, getTemperaments,Breeds_state,input,reset,loading,wai
         }else setPaginated(Breeds_state.length-8);
     }
     const number_page=(paginated+8)/8;
+    pagination_ctrl(paginated);
     const Handler_number_page= (event)=>{
         let value=(event.target.value*8)-8;
         if(Breeds_state.length>value && value>=0) setPaginated(value);
@@ -94,7 +95,7 @@ const Breeds = ({getBreeds, getTemperaments,Breeds_state,input,reset,loading,wai
         <div className='container_Breeds'>
 
             {waiting?<img src={img_loading} className='loading_img' alt='loading'/>
-            :filtered_breeds(Breeds_state).map((b,id)=>{ return <Breed page={number_page} key={id} datos={b}reset={reset}/>})}
+            :filtered_breeds(Breeds_state).map((b,id)=>{ return <Breed key={id} datos={b}reset={reset}/>})}
         </div>
         <div className='buttons_paginated'>
                 {/* first page */}
@@ -134,12 +135,14 @@ const mapDispatchToProps={
     getBreeds, 
     getTemperaments,
     loading,
+    pagination_ctrl
 }
 const mapStateToProps= (state)=>{
     return {
         Breeds_state: state.Breeds,
         Breeds_Details:state.Breeds_Details,
         waiting:state.loading,
+        pagination: state.pagination
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Breeds);
